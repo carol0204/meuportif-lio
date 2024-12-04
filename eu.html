@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Carolina Dias - Portfólio Tecnológico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            font-family: 'Roboto', sans-serif;
+            color: #00ff41;
+            overflow-x: hidden;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .tech-card {
+            background: rgba(45, 55, 72, 0.8);
+            border: 1px solid rgba(45, 212, 191, 0.5);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+        }
+        .floating-icons {
+    position: absolute; /* Faz o container ocupar toda a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Ocupa toda a altura da tela */
+    overflow: hidden; /* Esconde os ícones que saem da tela */
+    pointer-events: none; /* Impede interação com os ícones */
+}
+
+.icon {
+    position: absolute;
+    font-size: 2rem; /* Tamanho do ícone */
+    color: rgba(255, 255, 255, 0.404); /* Cor do ícone (pode ajustar para o desejado) */
+    animation: float 10s infinite linear;
+    opacity: 0.8; /* Ajuste de opacidade, pode ser 0 para ficar totalmente invisível */
+}
+
+/* Animação de movimento para os ícones */
+@keyframes float {
+    0% {
+        transform: translate(0, 0); /* Inicia na posição inicial */
+    }
+    25% {
+        transform: translate(30px, 30px); /* Move para a direita e para baixo */
+    }
+    50% {
+        transform: translate(-30px, 30px); /* Move para a esquerda e para baixo */
+    }
+    75% {
+        transform: translate(-30px, -30px); /* Move para a esquerda e para cima */
+    }
+    100% {
+        transform: translate(30px, -30px); /* Move para a direita e para cima */
+    }
+}
+
+        .media-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Aspect Ratio */
+        }
+        .media-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(31, 41, 55, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ff41;
+            font-family: 'Roboto Mono', monospace;
+        }
+      /* Adicionando a animação de loading */
+.skill-progress.loading {
+    background-image: linear-gradient(90deg, rgba(240, 240, 240, 0.2) 25%, rgba(255, 182, 193, 0.5) 50%, rgba(230, 230, 250, 0.2) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite linear;
+}
+
+/* Definindo a animação */
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Adicionando o efeito de loading nas barras */
+.skill-bar {
+    background-color: #2d2d2d; /* Cinza escuro */
+    border-radius: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+/* A barra de progresso */
+.skill-progress {
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Efeito de hover nos links do nav */
+nav a:hover {
+    transition: color 0.3s ease-in-out;
+    color: #ff9900; /* Cor laranja suave */
+}
+
+</style>
+</head>
+<body class="bg-gray-900 text-white relative">
+    <div class="floating-icons absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+    
+    <div class="container mx-auto px-4 py-8 relative z-10">
+        <div id="typing-hello" class="text-center mb-8 text-xl"></div>
+    
+        <header class="text-center mb-12">
+            <div class="flex justify-center mb-6">
+                <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-cyan-400 transform transition hover:scale-105">
+                    <img src="imagens/perfil.png" alt="Ana Carolina Dias" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <h1 class="text-5xl font-bold text-cyan-300 font-['Orbitron']">Ana Carolina Dias</h1>
+            <p class="text-xl text-cyan-200 mt-2">Engenharia da Computação | Recursos Humanos | Embraer | Tecnologia</p>
+        </header>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Journey Timeline -->
+            <div class="col-span-full bg-gray-800 p-6 rounded-lg card-hover">
+                <h2 class="text-3xl text-cyan-400 mb-6 text-center">🚀 Minha Jornada</h2>
+                <div class="space-y-4">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-cyan-300">Maternidade Integral</h3>
+                        <p class="text-gray-300">Anos dedicados à família, construindo base sólida de amor e apoio</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-cyan-300">Retorno Profissional</h3>
+                        <p class="text-gray-300">Transição corajosa para Engenharia da Computação, quebrando barreiras pessoais</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-cyan-300">Estágio Embraer</h3>
+                        <p class="text-gray-300">Início em fevereiro de 2025, com foco em aprendizado e aplicação de tecnologia no setor de ERP. Uma oportunidade para crescer profissionalmente em uma empresa reconhecida pela inovação no setor aeroespacial.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formação -->
+            <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                <h2 class="text-2xl text-cyan-400 mb-4">💻 Formação</h2>
+                <div class="space-y-4">
+                    <div class="skill-loading">
+                        <p class="text-gray-300 mb-2">Engenharia da Computação</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress loading" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-loading">
+                        <p class="text-gray-300 mb-2">Recursos Humanos</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress loading" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificações e Cursos -->
+            <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                <h2 class="text-2xl text-cyan-400 mb-4">📜 Certificações e Cursos</h2>
+                <div class="certificates">
+                    <ul class="space-y-2">
+                        <li><a href="https://www.credly.com/badges/b0fb37e6-372a-4a25-bf53-6555bd02039b/linked_in_profile" target="_blank" class="text-cyan-400 hover:underline">AWS Academy Graduate - AWS Academy Cloud Foundations</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8665679" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - Data Engineering</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8628913" target="_blank" class="text-cyan-400 hover:underline">Analyzing and Visualizing Data in Looker</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8628913" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - BigQuery</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8627097" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - AI & Machine Learning</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8261839" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - Kubernetes</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8230619" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - Networking</a></li>
+                        <li><a href="https://www.cloudskillsboost.google/public_profiles/a6162519-6d85-47bd-bf9a-4a4b007aaa29/badges/8189506" target="_blank" class="text-cyan-400 hover:underline">Google Cloud - Cloud Development</a></li>
+                        <li><a href="https://www.credly.com/badges/3cbfa49b-1727-4ff9-b9ab-3770f3657d79/linked_in" target="_blank" class="text-cyan-400 hover:underline">Python Essentials 1</a></li>
+                        <li class="text-cyan-400">Power BI</li>
+                        <li class="text-cyan-400">Implantação de Serviços de Inteligência Artificial em Nuvem - Microsoft AI-900</li>
+                        <li class="text-cyan-400">Front-End</li>
+                        <li class="text-cyan-400">Inteligência Artificial</li>
+                        <li class="text-cyan-400">Administrando banco de dados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sobre Mim / Missão Pessoal -->
+            <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                <h2 class="text-2xl text-cyan-400 mb-4">👤 Missão Pessoal</h2>
+                <p class="text-gray-300">Inspirar outras mulheres a recomeçar, mostrando que não há limites para crescimento e transformação. Minha jornada é prova de que podemos redesenhar nossa história a qualquer momento.</p>
+            </div>
+
+            <!-- Sobre Mim -->
+            <div class="tech-card bg-gray-800 p-6 rounded-lg col-span-full">
+                <h2 class="text-2xl text-cyan-400 mb-4">👤 Sobre Mim</h2>
+                <div class="flex flex-col md:flex-row items-center">
+                    <p class="text-gray-300 mb-4 md:mr-4 md:w-2/3">Olá, eu sou Ana Carolina Dias, ou simplesmente Carol. Minha jornada é marcada por escolhas que mudaram a minha vida de formas que nunca imaginei. Durante anos, fui mãe em tempo integral, dedicada a meus filhos e à construção de uma base sólida de amor e apoio para nossa família. Esse período foi de intensos aprendizados, mas também de um silêncio profissional, onde o mundo corporativo ficou para trás. Eu escolhi ser mãe de corpo e alma, e foi nesse tempo que aprendi o verdadeiro significado de resiliência. Mas, como todo ciclo na vida, chegou o momento de voltar a seguir meus próprios sonhos. Voltar à carreira foi um desafio imenso. Eu estava longe do mercado de trabalho, com uma formação em Recursos Humanos que parecia distante de tudo o que havia mudado. Mas algo dentro de mim gritava: "Você ainda tem muito a oferecer ao mundo". E foi assim que dei o primeiro passo na Engenharia da Computação, uma área que sempre me fascinou, mas que eu nunca tive a chance de explorar até aquele momento. Essa transição não foi fácil, mas foi, sem dúvida, uma das decisões mais corajosas que tomei. Cada dia, cada desafio me trouxe um aprendizado novo. Hoje, tenho o orgulho de dizer que sou uma mulher que quebrou barreiras, não apenas profissionais, mas pessoais. Meu retorno ao mercado de trabalho é um reflexo da minha força interna e do meu desejo imenso de mostrar a outras mulheres que, mesmo após anos de pausa, é possível recomeçar e alcançar os seus sonhos. Minha história é feita de escolhas, de amor e de uma constante busca por crescimento. E o melhor, ainda está por vir.</p>
+                    <div class="md:w-1/3">
+                        <img src="imagens/maternidade.png" alt="Foto/Vídeo sobre Mim" class="w-full h-auto object-contain rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Internship at Embraer -->
+            <div class="tech-card bg-gray-800 p-6 rounded-lg col-span-full">
+                <h2 class="text-2xl text-cyan-400 mb-4">✈️ Estágio Embraer</h2>
+                <div class="flex flex-col md:flex-row items-center">
+                    <p class="text-gray-300 mb-4 md:mr-4 md:w-1/2">Ser aprovada no processo seletivo da Gupy, entre muitos candidatos, foi um dos momentos mais marcantes da minha trajetória. Após anos me dedicando à maternidade, essa conquista representa não apenas o início de um novo capítulo, mas também o resultado de muita força de vontade e resiliência. Começo meu estágio na Embraer em fevereiro de 2025, no setor de ERP, com o sonho de continuar crescendo em uma das maiores empresas de tecnologia e aviação do mundo.</p>
+                    <div class="md:w-1/2">
+                        <img src="imagens/embraer.png" alt="Foto/Vídeo do Estágio" class="w-full h-auto object-contain rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Musical Journey -->
+            <div class="tech-card bg-gray-800 p-6 rounded-lg">
+                <h2 class="text-2xl text-cyan-400 mb-4">🎻 Jornada Musical</h2>
+                <p class="text-gray-300 mb-4">O violino entrou na minha vida na adolescência como uma conexão profunda com a música. Durante a pandemia, transformei este talento em um momento precioso de união familiar, ensinando meus filhos a tocar. Cada nota é uma memória, cada melodia uma história de amor.</p>
+                <img src="imagens/violino.png" alt="Foto/Vídeo de Violino" class="w-full h-auto object-contain rounded-lg">
+            </div>
+
+            <!-- Art of Sewing -->
+            <div class="tech-card bg-gray-800 p-6 rounded-lg">
+                <h2 class="text-2xl text-cyan-400 mb-4">✂️ Arte da Costura</h2>
+                <p class="text-gray-300 mb-4">Aprendi a costurar sozinha, desafiando expectativas e descobrindo um talento inesperado. Hoje, criar minhas próprias roupas é mais do que um hobby - é uma expressão de liberdade, criatividade e autodescoberta</p>
+                <img src="imagens/costura.png" alt="Foto/Vídeo de Costura" class="w-full h-auto object-contain rounded-lg">
+            </div>
+
+            <div class="tech-card bg-gray-800 p-6 rounded-lg">
+                <h2 class="text-2xl text-cyan-400 mb-4">🌿 Floresta da Calma</h2>
+                <p class="text-gray-300 mb-4">
+                    Um refúgio digital onde tecnologia e empatia se encontram para transformar vidas. Este projeto nasceu do desejo de criar um espaço acolhedor e seguro para mulheres, inspirado pela minha própria jornada de superação e crescimento.
+            
+                    A Floresta da Calma é mais do que um site: é uma iniciativa que busca fortalecer, apoiar e empoderar mulheres, ajudando-as a encontrar equilíbrio emocional, desenvolver habilidades e conquistar sua independência.
+                    Criado com dedicação e amor, o projeto oferece:
+                    
+                    - Personagens acolhedores e recursos práticos, como exercícios de respiração, histórias de superação e ferramentas para controle emocional.
+                    - Uma ponte para o mercado de trabalho, com dicas para melhorar currículos e utilizar a tecnologia como aliada no processo de recolocação profissional.
+            
+                    Eu fiz este projeto pensando em mulheres que, assim como eu, enfrentam desafios, mas não desistem de construir algo melhor. Quero que elas saibam que não estão sozinhas, que podem encontrar apoio e que têm a força para alcançar tudo o que sonham. A Floresta da Calma é minha maneira de dizer: "Você é capaz e merece todo o sucesso e felicidade do mundo!"
+                </p>
+                <p class="text-gray-300 mb-4">
+                    <a href="https://carol0204.github.io/missioncalm/" target="_blank" class="text-cyan-400 hover:underline">
+                        Visite o site da Floresta da Calma
+                    </a>
+                </p>
+                <p class="text-gray-300 mb-4">
+                    Esse projeto é uma prova de que a tecnologia pode ser uma aliada poderosa quando guiada pelo coração. 💚
+                </p>
+                <img src="imagens/projeto.png" alt="Foto/Vídeo do Projeto" class="w-full h-auto object-contain rounded-lg">
+            </div>
+            
+            <!-- Technological Philosophy -->
+            <div class="tech-card bg-gray-800 p-6 rounded-lg col-span-full">
+                <h2 class="text-2xl text-cyan-400 mb-4">🚀 Filosofia Tecnológica</h2>
+                <p class="text-gray-300">Acredito que a verdadeira inovação nasce da intersecção entre tecnologia, criatividade e compaixão. Cada desafio é uma oportunidade, cada erro um aprendizado, e cada sonho uma possibilidade de transformação.</p>
+            </div>
+        </div>
+    </div>
+
+   <!-- Typing Animation Script -->
+<script> 
+    // Configuração da animação de digitação
+    new Typed('#typing-hello', { 
+        strings: ['Hello Mundo', 'Bem-vindo ao meu mundo!', 'Ana Carolina - Transformando sonhos em código!', 'Cada desafio é uma oportunidade de crescimento!'], 
+        typeSpeed: 50, 
+        backSpeed: 30, 
+        startDelay: 500, // Delay inicial para destacar o Hello Mundo
+        backDelay: 2000, // Tempo de exibição antes do próximo texto
+        loop: true // Reiniciar a sequência após completar todas as frases
+    });
+
+    // Floating Icons (ícones flutuantes decorativos)
+const icons = ['fa-code', 'fa-laptop-code', 'fa-database', 'fa-robot', 'fa-terminal'];
+const container = document.querySelector('.floating-icons');
+
+for (let i = 0; i < 30; i++) {
+    const icon = document.createElement('i');
+    icon.className = `icon fas ${icons[Math.floor(Math.random() * icons.length)]}`;
+    icon.style.left = `${Math.random() * 100}%`; // Posiciona aleatoriamente na largura
+    icon.style.top = `${Math.random() * 100}%`; // Posiciona aleatoriamente na altura
+    container.appendChild(icon);
+}
+
+</script>
+<footer class="bg-gray-900 text-gray-400 py-6">
+    <div class="container mx-auto text-center">
+        <!-- Nome e Propósito -->
+        <p class="text-sm">
+            © 2024 Ana Carolina Dias | Portfólio Profissional
+        </p>
+        <!-- Links de Contato -->
+        <div class="flex justify-center space-x-4 mt-4">
+            <a href="https://www.linkedin.com/in/ana-carolina-dias-4752202b9?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B0Kqe5bGIS325IptwuYTewA%3D%3D" target="_blank" class="text-blue-400 hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.762 0-5 2.238-5 5v14c0 2.762 2.238 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.762-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.5c-.966 0-1.5-.75-1.5-1.5 0-.75.534-1.5 1.5-1.5s1.5 .75 1.5 1.5c0 .75-.534 1.5-1.5 1.5zm13.5 11.5h-3v-5.5c0-3.586-5-3.305-5 0v5.5h-3v-10h3v1.528c1.396-2.586 8-2.776 8 2.476v5.996z"/>
+                </svg>
+            </a>
+            <a href="mailto:caroldias0204@gmail.com" class="text-blue-400 hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 13l-12-7v-3l12 7 12-7v3z"/>
+                    <path d="M12 15l-12-7v10c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-10l-12 7z"/>
+                </svg>
+            </a>
+            <a href="https://github.com/carol0204" target="_blank" class="text-blue-400 hover:text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .5c-6.627 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.02c-3.338.726-4.033-1.416-4.033-1.416-.546-1.384-1.333-1.753-1.333-1.753-1.089-.745.082-.729.082-.729 1.204.084 1.838 1.237 1.838 1.237 1.07 1.835 2.809 1.305 3.495.997.107-.775.418-1.305.762-1.605-2.665-.305-5.466-1.335-5.466-5.931 0-1.311.469-2.382 1.236-3.222-.123-.304-.535-1.527.117-3.18 0 0 1.008-.322 3.301 1.23.957-.266 1.984-.399 3.005-.404 1.02.005 2.048.138 3.005.404 2.292-1.553 3.299-1.23 3.299-1.23.653 1.653.241 2.876.118 3.18.768.84 1.236 1.911 1.236 3.222 0 4.608-2.805 5.625-5.478 5.922.43.372.815 1.103.815 2.222v3.293c0 .32.22.692.825.575 4.765-1.587 8.205-6.083 8.205-11.385 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+        <!-- Final -->
+        <p class="mt-4 text-xs">
+            Feito com 💻, ☕ e muita dedicação.
+        </p>
+    </div>
+</footer>
+
+  </body>
+  </html>
+  
+  
+  
+  
