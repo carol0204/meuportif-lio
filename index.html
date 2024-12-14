@@ -230,8 +230,93 @@ nav a:hover {
 }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZTTS59DT4"></script>
+<!-- Add this in the <head> section of your HTML, after the existing script tags -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Glitch Effect for Headings
+        function applyGlitchEffect() {
+            const headings = document.querySelectorAll('h1, h2');
+            headings.forEach(heading => {
+                heading.classList.add('glitch');
+                heading.setAttribute('data-text', heading.textContent);
+            });
+        }
+    
+        // Cosmic Particle Background
+        function createParticleBackground() {
+            const container = document.getElementById('background-container') || 
+                (() => {
+                    const newContainer = document.createElement('div');
+                    newContainer.id = 'background-container';
+                    document.body.insertBefore(newContainer, document.body.firstChild);
+                    return newContainer;
+                })();
+    
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+    
+            // Adjust renderer style
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '-1';
+            renderer.domElement.style.pointerEvents = 'none';
+    
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 5000;
+            const posArray = new Float32Array(particlesCount * 3);
+    
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100; // Spread particles across the scene
+            }
+    
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+            // Particle material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.005,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.5
+            });
+    
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+    
+            camera.position.z = 1;
+    
+            // Animate particles
+            function animate() {
+                requestAnimationFrame(animate);
+    
+                // Subtle particle movement
+                particlesMesh.rotation.x += 0.0005;
+                particlesMesh.rotation.y += 0.0005;
+    
+                renderer.render(scene, camera);
+            }
+    
+            // Resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+    
+            animate();
+        }
+    
+        // Apply enhancements
+        applyGlitchEffect();
+        createParticleBackground();
+    });
+    </script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -448,10 +533,38 @@ for (let i = 0; i < 30; i++) {
         </p>
     </div>
 </footer>
+
+<script>
+    // Função para criar som dinâmico
+    function playCosmicSound() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        // Configuração do som
+        oscillator.type = 'sine'; // Tipo de onda (sine é suave e cósmico)
+        oscillator.frequency.setValueAtTime(432, audioCtx.currentTime); // Frequência ajustada para um som agradável
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        // Controle de volume e duração
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); // Volume inicial
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1); // Fade-out suave
+
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 1); // Duração do som (1 segundo)
+    }
+
+    // Adiciona o evento de hover
+    document.querySelectorAll('.floating-icons img').forEach(icon => {
+        icon.addEventListener('mouseover', playCosmicSound);
+    });
 </script>
+
+    </script>
 </body>
 </html>
-  
+
   
   
   
