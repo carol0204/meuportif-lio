@@ -10,11 +10,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+        
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
         body {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             font-family: 'Roboto', sans-serif;
             color: #00ff41;
-            overflow-x: hidden;
+            perspective: 1px;
         }
         .tech-grid {
             display: grid;
@@ -35,6 +41,15 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
         }
+        /* 3D Parallax Background */
+        #background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
         .floating-icons {
     position: absolute; /* Faz o container ocupar toda a tela */
     top: 0;
@@ -53,44 +68,98 @@
     opacity: 0.8; /* Ajuste de opacidade, pode ser 0 para ficar totalmente invisível */
 }
 
-/* Animação de movimento para os ícones */
-@keyframes float {
-    0% {
-        transform: translate(0, 0); /* Inicia na posição inicial */
-    }
-    25% {
-        transform: translate(30px, 30px); /* Move para a direita e para baixo */
-    }
-    50% {
-        transform: translate(-30px, 30px); /* Move para a esquerda e para baixo */
-    }
-    75% {
-        transform: translate(-30px, -30px); /* Move para a esquerda e para cima */
-    }
-    100% {
-        transform: translate(30px, -30px); /* Move para a direita e para cima */
-    }
-}
-
-        .media-container {
-            position: relative;
+        /* Enhanced Floating Icons */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding-top: 56.25%; /* Aspect Ratio */
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
         }
-        .media-content {
+
+        .icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 20s infinite linear;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.5);
+            color: rgba(0, 255, 255, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(-50px, 50px) rotate(180deg); }
+            75% { transform: translate(-50px, -50px) rotate(270deg); }
+        }
+
+        /* Glitch Effect for Headings */
+        .glitch {
+            position: relative;
+            color: #00ff41;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(31, 41, 55, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #00ff41;
-            font-family: 'Roboto Mono', monospace;
         }
-      /* Adicionando a animação de loading */
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(61px, 9999px, 52px, 0); }
+            5% { clip: rect(33px, 9999px, 33px, 0); }
+            10% { clip: rect(50px, 9999px, 34px, 0); }
+            15% { clip: rect(37px, 9999px, 44px, 0); }
+            20% { clip: rect(40px, 9999px, 20px, 0); }
+            25% { clip: rect(50px, 9999px, 70px, 0); }
+            /* ... more random clips ... */
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(29px, 9999px, 61px, 0); }
+            5% { clip: rect(42px, 9999px, 67px, 0); }
+            10% { clip: rect(57px, 9999px, 40px, 0); }
+            15% { clip: rect(66px, 9999px, 54px, 0); }
+            20% { clip: rect(70px, 9999px, 30px, 0); }
+            25% { clip: rect(35px, 9999px, 50px, 0); }
+            /* ... more random clips ... */
+        }
+
+        @keyframes glitch-skew {
+            0% { skew-x: -3deg; skew-y: -3deg; }
+            10% { skew-x: -3deg; skew-y: 3deg; }
+            20% { skew-x: 3deg; skew-y: -3deg; }
+            30% { skew-x: 3deg; skew-y: 3deg; }
+            40% { skew-x: -3deg; skew-y: -3deg; }
+        }
+    /* Adicionando a animação de loading */
 .skill-progress.loading {
     background-image: linear-gradient(90deg, rgba(240, 240, 240, 0.2) 25%, rgba(255, 182, 193, 0.5) 50%, rgba(230, 230, 250, 0.2) 75%);
     background-size: 200% 100%;
@@ -120,14 +189,46 @@
     height: 100%;
     border-radius: 10px;
 }
+        /* Interactive Skill Bars */
+        .skill-bar {
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
 
-/* Efeito de hover nos links do nav */
+        .skill-bar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Hover Effects */
+        .card-hover {
+            transition: all 0.5s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #16213e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00ff41;
+            border-radius: 5px;
+        }
+        /* Efeito de hover nos links do nav */
 nav a:hover {
     transition: color 0.3s ease-in-out;
     color: #ff9900; /* Cor laranja suave */
 }
-
-</style>
+    </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FZTTS59DT4"></script>
@@ -347,9 +448,9 @@ for (let i = 0; i < 30; i++) {
         </p>
     </div>
 </footer>
-
-  </body>
-  </html>
+</script>
+</body>
+</html>
   
   
   
